@@ -9,6 +9,8 @@ import java.util.Map;
 @RequestMapping("/api/v1/post-api")
 public class PostController {
 
+    /*POST API 는 웹 애플리케이션을 통해 데이터베이스 등의 저장소에 리소스를 저장할 때 사용되는 API이다.*/
+
     @RequestMapping(value = "/domain", method = RequestMethod.POST)
     public String postExample(){
         return "Hello Post API";

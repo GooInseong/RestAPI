@@ -1,6 +1,8 @@
 package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -9,6 +11,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/get-api")
 public class GetController {
 
+    /*GET API 는 웹 애플리케이션 서버에서 값을 가져올때 사용하는 API 이다.*/
     @RequestMapping(value ="/hello",method = RequestMethod.GET)
     public String getHello(){
         return "HelloWorld";
@@ -34,10 +37,14 @@ public class GetController {
         * PathVariable에 ()를 열어 변수명을 지정해야 한다.*/
     }
 
+    /*본 어노테이션은 Swagger 를 통해 대상 API 설명을 작성하기 위한 어노테이션이다.*/
+    @ApiOperation(value = "GET 메서드 예제", notes = "@RequestParam을 활용한 GET Method")
     @GetMapping(value = "/request1")
-    public String getRequestParam1(@RequestParam String name,
-                                   @RequestParam String email,
-                                   @RequestParam String organization   ){
+    public String getRequestParam1(@ApiParam(value="이름",required = true)
+                                   /*ApiPram 은 매개변수에 대한 설명 및 설정을 위한 어노테이션이다.*/
+                                       @RequestParam String name,
+                                   @ApiParam(value="이메일",required = true)@RequestParam String email,
+                                   @ApiParam(value="회사",required = true)@RequestParam String organization   ){
         return name+" "+email+ " "+organization;
         /*GET 요청을 구할때, 위처럼 url 경로상에 값을 담아 보내는 방법 외에도,
         * 쿼리 형식으로 값을 전달 할 수 있음. 경로 뒤에 ?와 {키}={값}&.. 의 형태로
